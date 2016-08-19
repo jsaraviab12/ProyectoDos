@@ -53,17 +53,34 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel2.setText("Numero uno:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+
+        txtNumeroUno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroUnoActionPerformed(evt);
+            }
+        });
+        txtNumeroUno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroUnoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNumeroUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 50, -1));
 
         jLabel3.setText("Numero dos:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
+
+        txtNumeroDos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroDosKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNumeroDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 50, -1));
 
         jLabel4.setText("Resultado :");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, -1, -1));
 
         txtResultado.setEditable(false);
-        jPanel1.add(txtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 70, -1));
+        jPanel1.add(txtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 70, -1));
 
         cmdCalcular.setText("Calcular");
         cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +122,8 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
-      String res;
+      
+        String res;
       double n1, n2, resultado=0;
       int op;
       if(txtNumeroUno.getText().trim ().isEmpty()){
@@ -118,9 +136,15 @@ public class Principal extends javax.swing.JFrame {
           txtNumeroDos.requestFocusInWindow();  
     }
       else{
+          
      n1 = Double.parseDouble(txtNumeroUno.getText());
      n2 = Double.parseDouble(txtNumeroDos.getText());
      op =  cmbOperacion.getSelectedIndex();
+    if(op == 3 && n2 ==0){
+   JOptionPane.showMessageDialog(this, "No digite cero en el número dos","Error",JOptionPane.ERROR_MESSAGE);
+          txtNumeroDos.requestFocusInWindow();
+          txtNumeroDos.selectAll();
+    }else{
      switch (op){
          case 0:
              resultado=n1+n2;
@@ -139,6 +163,7 @@ public class Principal extends javax.swing.JFrame {
       res = String.valueOf(resultado);
       txtResultado.setText(res);
       }
+      }
     }//GEN-LAST:event_cmdCalcularActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
@@ -148,6 +173,35 @@ public class Principal extends javax.swing.JFrame {
         txtNumeroUno.requestFocusInWindow();
         cmbOperacion.setSelectedIndex(0);
     }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void txtNumeroUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroUnoActionPerformed
+        
+    }//GEN-LAST:event_txtNumeroUnoActionPerformed
+
+    private void txtNumeroUnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroUnoKeyTyped
+       
+         char c=evt.getKeyChar(); 
+             
+         
+          if(!Character.isDigit(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+              
+               
+          } 
+    }//GEN-LAST:event_txtNumeroUnoKeyTyped
+
+    private void txtNumeroDosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroDosKeyTyped
+         char c=evt.getKeyChar(); 
+             
+         
+          if(!Character.isDigit(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); }
+    }//GEN-LAST:event_txtNumeroDosKeyTyped
 
     /**
      * @param args the command line arguments
